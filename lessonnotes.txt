@@ -40,3 +40,22 @@ CMD is an entrypoint command, that's it. It marks for the dockerfile, "hey, this
 
 
 Every time you change a Dockerfile, you must delete the old image
+
+Docker Volumes:
+
+Ways to define volume:
+
+1. Docker Run Command in Dockerfile
+EXAMPLE: -v /home/mount/data:/var/lib/testfolder/data
+            THIS LEFT SIDE IS ON THE HOST:THIS RIGHT SIDE IS IN THE Container
+2. No specification 
+Docker creates any directory to be designated as the mount point on the host...not really the best.
+
+3. Named Volumes
+Basically you can reffernce the volume by name. Example:
+-v name:/var/lib/testfolder/data 
+People use this the most
+Structure:
+-v the-name:/place/where/data/should-be
+
+In a docker compose files, you can specify shared volumes.
