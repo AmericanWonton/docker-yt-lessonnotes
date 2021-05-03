@@ -1,0 +1,42 @@
+Lesson Link: https://www.youtube.com/watch?v=3c-iBn73dDE
+
+You can create 'docker networks' so that applications can talk to and refference each other. Example Command:
+docker network create mongo-network
+
+You can build 'docker compose files' to start/stop docker applications
+with certain specifications, (like what port, Environment variables, etc.)
+See the example mongo.yaml file for an example.
+After creation, you can run the following to compose those commands:
+docker-compose -f mongo.yaml up
+The 'up' commands starts the conatiners in the file
+
+Dockerfile seems like a better use case then I think, tho...
+
+What is a Dockerfile?
+It is a built artifact, a blueprint for building images
+Dockerfiles have similar, simple syntax...it depends from different programming languages, like go
+
+FROM something is just building from an established Docker Container.
+Like, on the Dockerhub site, there's a package called golang, and golang 1.37, etc.
+It has a bunch of the package stuff requierd to run your container so you don't need to 
+install anything in the file(golang has golang in it)
+
+ENV Define Environment Vairables inside of the image environment 
+
+RUN execute any linux commands
+example: mkdir -p /home/app is making a directory INSIDE of the container environment
+
+COPY . /home/app This copies files that you have on you HOST,(so, in the go work environment on your laptop, in this case, with the 
+dot notation, so within the folder this Dockerfile is in) INTO your container. So, it copies all of the golang files into a specific directory
+
+CMD is an 'entrypoint' linux command. For the following example:
+CMD ["./main"]
+This is telling the Dockerfile to run the golang binary we specified to be called 'main' inside the container
+In her example, it was the 'run node' command: CMD["node", "server.js"], which they can do because they 
+made the dockerfile to be FROM node
+
+Difference between CMD and RUN:
+CMD is an entrypoint command, that's it. It marks for the dockerfile, "hey, this is where the application should start."
+
+
+Every time you change a Dockerfile, you must delete the old image
